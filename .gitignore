@@ -1,0 +1,5 @@
+.vagrant/
+test-logs/
+venv/
+*.retry
+*.log

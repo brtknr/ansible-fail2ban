@@ -1,0 +1,16 @@
+- name: copy auth logs to remote
+  become: True
+  copy:
+    src: test-logs/auth.log
+    dest: /var/log/auth.log
+    mode: 640
+    owner: syslog
+    group: adm
+- name: copy nginx logs to remote
+  become: True  
+  copy:
+    src: test-logs/nginx/
+    dest: /var/log/nginx/
+    mode: 640
+    owner: syslog
+    group: adm

@@ -1,0 +1,27 @@
+- name: install the latest version of fail2ban
+  become: True
+  package:
+    name: fail2ban
+    state: latest
+
+- name: add a new rule
+  become: True
+  lineinfile:
+    path: /etc/fail2ban/filter.d/sshd.conf
+    insertafter: "^failregex ="
+    line: '            {{ item }}'
+    state: present
+  with_items:
+  - '^%(__prefix_line)smaximum authentication attempts exceeded for root from <HOST>'
+  - '^%(__prefix_line)smaximum attempts exceeded for root from <HOST>'
+
+  notify: reload fail2ban
+
+- name: delete the rule
+  become: True
+  lineinfile:
+    path: /etc/fail2ban/filter.d/sshd.conf
+    regexp: "maximum authentication"
+    state: absent
+  notify: reload fail2ban
+  when: False
