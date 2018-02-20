@@ -1,0 +1,5 @@
+config:
+  - name: sshd
+    append:
+      - '^%(__prefix_line)smaximum authentication attempts exceeded for root from <HOST>'
+      - '^%(__prefix_line)smaximum attempts exceeded for root from <HOST>'
