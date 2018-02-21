@@ -1,5 +1,6 @@
 - name: reload fail2ban
   become: True
   service:
-    name: fail2ban-client
+    name: fail2ban
     state: restarted
+

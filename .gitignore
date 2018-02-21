@@ -3,3 +3,5 @@ test-logs/
 venv/
 *.retry
 *.log
+.DS_Store
+

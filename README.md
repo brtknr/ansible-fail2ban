@@ -14,5 +14,5 @@ Check vagrant ssh-config and ensure that it matches the credentials listed insid
 virtualenv venv
 pip install -r requirements.txt
 source venv/bin/activate
-ansible-playbook -i hosts.yml -vv playbook.yml
+ansible-playbook -i hosts -vv playbook.yml
 ```

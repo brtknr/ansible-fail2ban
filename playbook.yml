@@ -1,8 +1,9 @@
 ---
 #
-# Apply IPoIB configuration for all nodes in the cluster
+# Setup fail2ban and add new rules
 #
 - hosts: virtualbox
   roles:
     # - test
     - fail2ban
+

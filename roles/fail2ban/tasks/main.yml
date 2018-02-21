@@ -1,3 +1,4 @@
+---
 - name: update and upgrade apt
   become: True
   apt:
@@ -10,25 +11,40 @@
   package:
     name: fail2ban
     state: latest
+  notify: start fail2ban
+
+- name: start fail2ban
+  become: True
+  service:
+    name: fail2ban
+    state: started
 
 - name: add a new rule
   become: True
   lineinfile:
     path: "/etc/fail2ban/filter.d/{{ item.0.name }}.conf"
     insertafter: "^failregex ="
-    line: '            {{ item.1 }}'
+    line: "            {{ item.1 }}"
     state: present
   with_subelements:
     - "{{ config }}"
-    - append
+    - rule
   notify: reload fail2ban
 
-- name: delete the rule
+- name: delete the rules
   become: True
   lineinfile:
-    path: /etc/fail2ban/filter.d/sshd.conf
-    regexp: "maximum authentication"
+    path: "/etc/fail2ban/filter.d/{{ item.0.name }}.conf"
+    line: "            {{ item.1 }}"
     state: absent
+  with_subelements:
+    - "{{ config }}"
+    - rule
   notify: reload fail2ban
-  when: False
 
+- name: stop fail2ban
+  become: True
+  service:
+    name: fail2ban
+    state: stopped
+...

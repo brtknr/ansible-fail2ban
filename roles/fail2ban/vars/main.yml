@@ -1,5 +1,6 @@
 config:
   - name: sshd
-    append:
+    rule:
       - '^%(__prefix_line)smaximum authentication attempts exceeded for root from <HOST>'
-      - '^%(__prefix_line)smaximum attempts exceeded for root from <HOST>'
+      - '^%(__prefix_line)sDid not receive identification string from <HOST>'
+      - '^%(__prefix_line)sInvalid user [\w]+ from <HOST>'
