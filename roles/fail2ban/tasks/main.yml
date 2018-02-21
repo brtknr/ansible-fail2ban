@@ -19,7 +19,7 @@
     name: fail2ban
     state: started
 
-- name: add a new rule
+- name: add new rules
   become: True
   lineinfile:
     path: "/etc/fail2ban/filter.d/{{ item.0.name }}.conf"
